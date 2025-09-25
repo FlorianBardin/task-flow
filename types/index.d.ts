@@ -18,6 +18,6 @@ export interface Task {
   title: string;
   description?: string;
   priority?: "low" | "medium" | "high";
-  assignee?: string;
+  assignee?: string[];
   dueDate?: Date;
 }
