@@ -19,4 +19,18 @@
   h3 {
     @apply text-2xl;
   }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
+  }
+}
+
+@utility badge {
+  @apply w-fit px-2 rounded-full text-sm h-fit;
+}
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#90757c] via-[#000000] to-[#808abb];
 }
