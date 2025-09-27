@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { mockKanbanData } from "../data/mockData";
 import KanbanColumn from "./components/KanbanColumn";
+import Button from "./components/Button";
 
 const App = () => {
   const [activeKanban, setActiveKanban] = useState(mockKanbanData);
@@ -16,8 +17,12 @@ const App = () => {
           </select>
         </nav>
       </div>
-      <div className="bg-white p-6 rounded-2xl border border-gray-200">
-        <h1 className="font-medium">Project UI/UX</h1>
+      <div className="flex flex-col gap-6 bg-white p-6 rounded-2xl border border-gray-200">
+        <h1 className="font-medium">{activeKanban.name}</h1>
+        <div className="flex gap-2">
+          <Button variant="primary">New column</Button>
+          <Button variant="destructive">Delete kanban</Button>
+        </div>
         <div className="flex flex-col gap-4">
           {activeKanban.columns.map((column) => {
             return <KanbanColumn {...column} key={column.id} />;
