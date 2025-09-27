@@ -10,7 +10,7 @@ const KanbanTask = (task: Task) => {
         <Badge color={task.priority}>{task.priority}</Badge>
       </div>
       <p className="text-gray-600">{task.description}</p>
-      <div className="flex gap-2 items-center mt-1.5">
+      <div className="flex gap-2 items-center mt-1.5 flex-wrap">
         <img className="h-4" src={assigned} alt="" />
         {task.assignee?.map((name) => {
           return <Badge color="assign">{name}</Badge>;
