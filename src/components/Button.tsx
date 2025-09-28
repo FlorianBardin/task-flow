@@ -7,8 +7,8 @@ type ButtonProps = {
 
 const Button = ({ children, variant }: ButtonProps) => {
   const variants = {
-    primary: "text-gray-700 border border-gray-300 hover:bg-gray-100",
-    secondary: "bg-gray-900 text-white",
+    primary: "text-gray-700 inset-ring inset-ring-gray-300 hover:bg-gray-100",
+    secondary: "bg-gray-900 text-white hover:bg-gray-700",
     destructive: "bg-red-500 text-white hover:bg-red-600",
   };
 
