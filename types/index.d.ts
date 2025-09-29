@@ -1,9 +1,9 @@
 export interface Kanban {
   id: number;
   name: string;
-  description?: string;
+  description: string;
   columns: Column[];
-  createdAt?: Date;
+  createdAt: Date;
 }
 
 export interface Column {
@@ -16,8 +16,13 @@ export interface Column {
 export interface Task {
   id: number;
   title: string;
-  description?: string;
-  priority: "low" | "medium" | "high";
-  assignee: string[];
-  dueDate?: Date;
+  description: string;
+  priority: "Low" | "Medium" | "High";
+  assignee: Assignee[];
+  dueDate: Date;
+}
+
+export interface Assignee {
+  id: number;
+  name: string;
 }
