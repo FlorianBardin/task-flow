@@ -1,7 +1,5 @@
 import type { Column } from "../../types/index";
 import KanbanTask from "./KanbanTask";
-import add from "../assets/add.svg";
-import modify from "../assets/modify.svg";
 
 type KanbanColumnProps = {
   column: Column;
@@ -17,14 +15,10 @@ const KanbanColumn = ({ column }: KanbanColumnProps) => {
             {column.tasks.length}
           </div>
         </div>
-        <div className="flex flex-row-reverse h-4 w-4 gap-4">
-          <img src={add} alt="Add button" />
-          <img src={modify} alt="Modify button" />
-        </div>
       </div>
       <div className="flex flex-col gap-3">
         {column.tasks.map((task) => {
-          return <KanbanTask {...task} key={task.id} />;
+          return <KanbanTask task={task} key={task.id} />;
         })}
       </div>
     </div>
