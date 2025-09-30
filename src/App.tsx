@@ -25,9 +25,9 @@ const App = () => {
       >
         Clear local storage
       </button>
-      <div className="flex justify-between px-4 gap-3">
+      <div className="flex justify-between items-start sm:items-center px-4 gap-3">
         <img className="w-9.5" src="task-flow-logo.svg" alt="" />
-        <div className="flex flex-row-reverse gap-2 justify-between">
+        <div className="flex flex-col sm:flex-row-reverse items-end gap-2">
           <Button
             variant="secondary"
             onClick={() => {
