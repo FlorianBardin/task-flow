@@ -34,3 +34,7 @@
 @utility text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-[#90757c] via-[#000000] to-[#808abb];
 }
+
+@utility input {
+  @apply text-gray-700 inset-ring inset-ring-gray-300 rounded-md p-2;
+}
