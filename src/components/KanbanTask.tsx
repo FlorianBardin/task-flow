@@ -1,8 +1,13 @@
 import type { Task } from "../../types";
 import Badge from "./Badge";
 import assigned from "../assets/assigned.svg";
+import modify from "../assets/modify.svg";
 
-const KanbanTask = (task: Task) => {
+type KanbanTaskProps = {
+  task: Task;
+};
+
+const KanbanTask = ({ task }: KanbanTaskProps) => {
   return (
     <div className="flex flex-col bg-white p-4 rounded-lg border border-gray-200 gap-2">
       <div className="flex justify-between items-center">
@@ -20,7 +25,10 @@ const KanbanTask = (task: Task) => {
           );
         })}
       </div>
-      <p className="text-gray-400 mt-5">{task.dueDate?.toDateString()}</p>
+      <div className="flex items-center justify-between mt-5">
+        <p className="text-gray-400">{new Date(task.dueDate).toDateString()}</p>
+        <img className="h-4" src={modify} alt="Modify button" />
+      </div>
     </div>
   );
 };
