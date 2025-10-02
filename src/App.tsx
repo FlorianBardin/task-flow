@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { mockData } from "../data/mockData";
-import { newBoard } from "../data/newBoard";
 import KanbanColumn from "./components/KanbanColumn";
 import Button from "./components/Button";
 import NewBoardForm from "./components/NewBoardForm";
 import { useLocalStorage } from "react-use";
-import { Dialog } from "@headlessui/react";
+import NewTaskForm from "./components/NewTaskForm";
 
 const App = () => {
   const [kanbanStorage, setKanbanStorage] = useLocalStorage(
@@ -13,7 +12,6 @@ const App = () => {
     mockData
   );
   const [activeKanban, setActiveKanban] = useState(kanbanStorage![0]);
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <main className="flex flex-col p-4 gap-4 xl:min-h-[100vh]">
@@ -28,26 +26,15 @@ const App = () => {
       <div className="flex justify-between items-start sm:items-center px-4 gap-3">
         <img className="w-9.5" src="task-flow-logo.svg" alt="" />
         <div className="flex flex-col sm:flex-row-reverse items-end gap-2">
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setIsOpen(true);
-            }}
-          >
-            New Board
-          </Button>
-          <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-            <NewBoardForm
-              setIsOpen={setIsOpen}
-              kanbanStorage={kanbanStorage}
-              setKanbanStorage={setKanbanStorage}
-            />
-          </Dialog>
+          <NewBoardForm
+            kanbanStorage={kanbanStorage}
+            setKanbanStorage={setKanbanStorage}
+          />
           <nav>
             <select
               name="kanban"
               id="kanban"
-              className="text-gray-700 inset-ring inset-ring-gray-300 p-2 px-4 h-10 w-fit rounded-lg cursor-pointer transition"
+              className="text-gray-700 inset-ring inset-ring-gray-300 p-2 px-4 h-10 w-fit rounded-lg cursor-pointer"
               onChange={(e) =>
                 setActiveKanban(
                   kanbanStorage!.find(
@@ -74,7 +61,12 @@ const App = () => {
           <p className="text-gray-600">{activeKanban.description}</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="primary">New Task</Button>
+          <NewTaskForm
+            kanbanStorage={kanbanStorage}
+            setKanbanStorage={setKanbanStorage}
+            activeKanban={activeKanban}
+            setActiveKanban={setActiveKanban}
+          />
           <Button variant="secondary">Change WIP limit</Button>
         </div>
         <div className="flex flex-col gap-4 xl:flex-row">
