@@ -36,5 +36,5 @@
 }
 
 @utility input {
-  @apply text-gray-700 inset-ring inset-ring-gray-300 rounded-md p-2;
+  @apply text-gray-700 inset-ring inset-ring-gray-300 rounded-lg p-2;
 }
