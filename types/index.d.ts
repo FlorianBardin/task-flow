@@ -2,6 +2,7 @@ export interface Kanban {
   id: number;
   name: string;
   description: string;
+  wip: number;
   columns: Column[];
   createdAt: Date;
 }

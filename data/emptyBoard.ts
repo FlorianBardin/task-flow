@@ -4,6 +4,7 @@ export const emptyBoard: Kanban = {
   id: 0,
   name: "",
   description: "",
+  wip: 3,
   createdAt: new Date(),
   columns: [
     {

@@ -5,6 +5,7 @@ export const mockData: Kanban[] = [
     id: 1,
     name: "Projet App Mobile",
     description: "Développement d'une application mobile de gestion de tâches",
+    wip: 3,
     createdAt: new Date("2025-01-15"),
     columns: [
       {
@@ -90,6 +91,7 @@ export const mockData: Kanban[] = [
     id: 2,
     name: "Site Web Marketing",
     description: "Création d’un site vitrine pour la startup",
+    wip: 3,
     createdAt: new Date("2025-02-01"),
     columns: [
       {

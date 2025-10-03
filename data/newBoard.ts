@@ -5,6 +5,7 @@ export const newBoard: Kanban = {
   name: "New Kanban Board",
   description:
     "The tables provide a description to best describe the topic covered.",
+  wip: 3,
   createdAt: new Date(),
   columns: [
     {

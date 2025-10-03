@@ -9,6 +9,7 @@ import { KanbanContext } from "./contexts/KanbanContext";
 import { newBoard } from "../data/newBoard";
 import whiteLeft from "./assets/whiteLeft.svg";
 import whiteRight from "./assets/whiteRight.svg";
+import { useEffect } from "react";
 
 const App = () => {
   const [kanbanStorage, setKanbanStorage] = useLocalStorage(
@@ -16,7 +17,22 @@ const App = () => {
     mockData
   );
   const [activeKanban, setActiveKanban] = useState(kanbanStorage![0]);
-  const [wipLimit, setWipLimit] = useState(3);
+  const [wipLimit, setWipLimit] = useState(activeKanban.wip);
+
+  const updateWipInStorage = (newWip: number) => {
+    const updatedStorage = kanbanStorage!.map((kanban) => {
+      if (kanban.id === activeKanban.id) {
+        return { ...kanban, wip: newWip };
+      }
+      return kanban;
+    });
+    setKanbanStorage(updatedStorage);
+    setWipLimit(newWip);
+  };
+
+  useEffect(() => {
+    setWipLimit(activeKanban.wip);
+  }, [activeKanban]);
 
   const deleteKanban = () => {
     const updatedStorage = kanbanStorage!.filter(
@@ -99,7 +115,7 @@ const App = () => {
               <button
                 className="increase-button"
                 onClick={() => {
-                  if (wipLimit - 1 >= 0) setWipLimit(wipLimit - 1);
+                  if (wipLimit - 1 >= 0) updateWipInStorage(wipLimit - 1);
                 }}
               >
                 <img className="w-2" src={whiteLeft} alt="" />
@@ -109,7 +125,7 @@ const App = () => {
               </p>
               <button
                 className="increase-button"
-                onClick={() => setWipLimit(wipLimit + 1)}
+                onClick={() => updateWipInStorage(wipLimit + 1)}
               >
                 <img className="w-2" src={whiteRight} alt="" />
               </button>
