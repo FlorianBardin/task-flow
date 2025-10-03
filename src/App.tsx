@@ -6,6 +6,7 @@ import NewBoardForm from "./components/NewBoardForm";
 import { useLocalStorage } from "react-use";
 import NewTaskForm from "./components/NewTaskForm";
 import { KanbanContext } from "./contexts/KanbanContext";
+import { newBoard } from "../data/newBoard";
 
 const App = () => {
   const [kanbanStorage, setKanbanStorage] = useLocalStorage(
@@ -13,6 +14,19 @@ const App = () => {
     mockData
   );
   const [activeKanban, setActiveKanban] = useState(kanbanStorage![0]);
+
+  const deleteKanban = () => {
+    const updatedStorage = kanbanStorage!.filter(
+      (kanban) => kanban.id !== activeKanban.id
+    );
+
+    if (updatedStorage.length === 0) {
+      updatedStorage.unshift(newBoard);
+    }
+
+    setKanbanStorage(updatedStorage);
+    setActiveKanban(updatedStorage[0]);
+  };
 
   return (
     <main className="flex flex-col p-4 gap-4 xl:min-h-[100vh]">
@@ -83,7 +97,9 @@ const App = () => {
               return <KanbanColumn column={column} key={column.id} />;
             })}
           </div>
-          <Button variant="destructive">Delete kanban</Button>
+          <Button variant="destructive" onClick={deleteKanban}>
+            Delete kanban
+          </Button>
         </div>
       </KanbanContext.Provider>
     </main>
