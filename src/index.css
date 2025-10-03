@@ -38,3 +38,7 @@
 @utility input {
   @apply text-gray-700 inset-ring inset-ring-gray-300 rounded-lg p-2;
 }
+
+@utility increase-button {
+  @apply bg-gray-900 p-2.5 rounded-lg hover:bg-gray-700 cursor-pointer;
+}
