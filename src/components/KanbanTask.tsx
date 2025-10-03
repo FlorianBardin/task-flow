@@ -4,12 +4,105 @@ import assigned from "../assets/assigned.svg";
 import modify from "../assets/modify.svg";
 import left from "../assets/left.svg";
 import right from "../assets/right.svg";
+import { useContext } from "react";
+import { KanbanContext } from "../contexts/KanbanContext";
 
 type KanbanTaskProps = {
   task: Task;
 };
 
 const KanbanTask = ({ task }: KanbanTaskProps) => {
+  const { activeKanban, setActiveKanban, kanbanStorage, setKanbanStorage } =
+    useContext(KanbanContext);
+
+  const moveRight = () => {
+    // Logic to move task to the right column
+    const oldColumn = activeKanban.columns.find((col) =>
+      col.tasks.some((t) => t.id === task.id)
+    );
+
+    if (!oldColumn) return;
+
+    const updatedOldColumn = {
+      ...oldColumn,
+      tasks: oldColumn.tasks.filter((t) => t.id !== task.id),
+    };
+
+    const newColumn =
+      activeKanban.columns[activeKanban.columns.indexOf(oldColumn) + 1];
+
+    if (!newColumn) return;
+
+    const updatedNewColumn = {
+      ...newColumn,
+      tasks: [task, ...newColumn.tasks],
+    };
+
+    const updatedColumns = [...activeKanban.columns];
+    updatedColumns[activeKanban.columns.indexOf(oldColumn)] = updatedOldColumn;
+    updatedColumns[activeKanban.columns.indexOf(newColumn)] = updatedNewColumn;
+
+    const updatedKanban = {
+      ...activeKanban,
+      columns: updatedColumns,
+    };
+
+    setActiveKanban(updatedKanban);
+
+    const updatedStorage = [...kanbanStorage!];
+    for (let i = 0; i < updatedStorage.length; i++) {
+      if (updatedStorage[i].id == updatedKanban.id) {
+        updatedStorage.splice(i, 1);
+        updatedStorage.unshift(updatedKanban);
+      }
+    }
+    setKanbanStorage(updatedStorage);
+  };
+
+  const moveLeft = () => {
+    // Logic to move task to the left column
+    const oldColumn = activeKanban.columns.find((col) =>
+      col.tasks.some((t) => t.id === task.id)
+    );
+
+    if (!oldColumn) return;
+
+    const updatedOldColumn = {
+      ...oldColumn,
+      tasks: oldColumn.tasks.filter((t) => t.id !== task.id),
+    };
+
+    const newColumn =
+      activeKanban.columns[activeKanban.columns.indexOf(oldColumn) - 1];
+
+    if (!newColumn) return;
+
+    const updatedNewColumn = {
+      ...newColumn,
+      tasks: [task, ...newColumn.tasks],
+    };
+
+    const updatedColumns = [...activeKanban.columns];
+    updatedColumns[activeKanban.columns.indexOf(oldColumn)] = updatedOldColumn;
+    updatedColumns[activeKanban.columns.indexOf(newColumn)] = updatedNewColumn;
+
+    const updatedKanban = {
+      ...activeKanban,
+      columns: updatedColumns,
+    };
+
+    setActiveKanban(updatedKanban);
+
+    const updatedStorage = [...kanbanStorage!];
+    for (let i = 0; i < updatedStorage.length; i++) {
+      if (updatedStorage[i].id == updatedKanban.id) {
+        updatedStorage.splice(i, 1);
+        updatedStorage.unshift(updatedKanban);
+      }
+    }
+    setKanbanStorage(updatedStorage);
+  };
+
   return (
     <div className="flex flex-col bg-white p-4 rounded-lg border border-gray-200 gap-2">
       <div className="flex justify-between items-center">
@@ -31,10 +124,22 @@ const KanbanTask = ({ task }: KanbanTaskProps) => {
         <p className="text-gray-400">{new Date(task.dueDate).toDateString()}</p>
         <div className="flex gap-3 items-center">
           <img className="h-4" src={modify} alt="Modify button" />
-          <button>
+          <button
+            onClick={moveLeft}
+            className="rounded-sm hover:bg-gray-200 disabled:opacity-50"
+            disabled={activeKanban.columns[0].tasks.some(
+              (t) => t.id === task.id
+            )}
+          >
             <img className="h-5" src={left} alt="" />
           </button>
-          <button>
+          <button
+            onClick={moveRight}
+            className="rounded-sm hover:bg-gray-200 disabled:opacity-50"
+            disabled={activeKanban.columns[
+              activeKanban.columns.length - 1
+            ].tasks.some((t) => t.id === task.id)}
+          >
             <img className="h-5" src={right} alt="" />
           </button>
         </div>
