@@ -1,33 +1,44 @@
 import type { Kanban } from "../types";
 
 export const newBoard: Kanban = {
-  id: 5,
-  name: "Nouveau Tableau",
-  description: "Description du nouveau tableau Kanban",
+  id: 0,
+  name: "New Kanban Board",
+  description:
+    "The tables provide a description to best describe the topic covered.",
   createdAt: new Date(),
   columns: [
     {
       id: "col-1",
       name: "todo",
-      title: "À faire",
-      tasks: [],
+      title: "To Do",
+      tasks: [
+        {
+          id: 1,
+          title: "New task",
+          description:
+            "You can also describe your tasks, indicate their priority and assign people to them!",
+          priority: "Low",
+          assignee: [{ id: 1, name: "Team member" }],
+          dueDate: new Date(),
+        },
+      ],
     },
     {
       id: "col-2",
       name: "doing",
-      title: "En cours",
+      title: "In Progress",
       tasks: [],
     },
     {
       id: "col-3",
       name: "toreview",
-      title: "À relire",
+      title: "In Review",
       tasks: [],
     },
     {
       id: "col-4",
       name: "done",
-      title: "Terminé",
+      title: "Done",
       tasks: [],
     },
   ],
