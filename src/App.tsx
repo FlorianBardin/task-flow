@@ -7,6 +7,8 @@ import { useLocalStorage } from "react-use";
 import NewTaskForm from "./components/NewTaskForm";
 import { KanbanContext } from "./contexts/KanbanContext";
 import { newBoard } from "../data/newBoard";
+import whiteLeft from "./assets/whiteLeft.svg";
+import whiteRight from "./assets/whiteRight.svg";
 
 const App = () => {
   const [kanbanStorage, setKanbanStorage] = useLocalStorage(
@@ -14,6 +16,7 @@ const App = () => {
     mockData
   );
   const [activeKanban, setActiveKanban] = useState(kanbanStorage![0]);
+  const [wipLimit, setWipLimit] = useState(3);
 
   const deleteKanban = () => {
     const updatedStorage = kanbanStorage!.filter(
@@ -36,6 +39,7 @@ const App = () => {
           setActiveKanban: setActiveKanban,
           kanbanStorage: kanbanStorage,
           setKanbanStorage: setKanbanStorage,
+          wipLimit: wipLimit,
         }}
       >
         <button
@@ -83,14 +87,33 @@ const App = () => {
             <h1 className="font-medium">{activeKanban.name}</h1>
             <p className="text-gray-600">{activeKanban.description}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex justify-between">
             <NewTaskForm
               kanbanStorage={kanbanStorage}
               setKanbanStorage={setKanbanStorage}
               activeKanban={activeKanban}
               setActiveKanban={setActiveKanban}
             />
-            <Button variant="secondary">Change WIP limit</Button>
+            <div className="flex gap-3 items-center">
+              <p className="text-gray-700">WIP Limit : </p>
+              <button
+                className="increase-button"
+                onClick={() => {
+                  if (wipLimit - 1 >= 0) setWipLimit(wipLimit - 1);
+                }}
+              >
+                <img className="w-2" src={whiteLeft} alt="" />
+              </button>
+              <p className="bg-gray-200 rounded-lg h-fit w-fit p-2 px-4">
+                {wipLimit}
+              </p>
+              <button
+                className="increase-button"
+                onClick={() => setWipLimit(wipLimit + 1)}
+              >
+                <img className="w-2" src={whiteRight} alt="" />
+              </button>
+            </div>
           </div>
           <div className="flex flex-col gap-4 xl:flex-row">
             {activeKanban.columns.map((column) => {
