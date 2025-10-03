@@ -12,8 +12,13 @@ type KanbanTaskProps = {
 };
 
 const KanbanTask = ({ task }: KanbanTaskProps) => {
-  const { activeKanban, setActiveKanban, kanbanStorage, setKanbanStorage } =
-    useContext(KanbanContext);
+  const {
+    activeKanban,
+    setActiveKanban,
+    kanbanStorage,
+    setKanbanStorage,
+    wipLimit,
+  } = useContext(KanbanContext);
 
   const moveRight = () => {
     // Logic to move task to the right column
@@ -127,18 +132,24 @@ const KanbanTask = ({ task }: KanbanTaskProps) => {
           <button
             onClick={moveLeft}
             className="rounded-sm hover:bg-gray-200 disabled:opacity-50"
-            disabled={activeKanban.columns[0].tasks.some(
-              (t) => t.id === task.id
-            )}
+            disabled={
+              activeKanban.columns[0].tasks.some((t) => t.id === task.id) ||
+              (activeKanban.columns[1].tasks.length >= wipLimit &&
+                activeKanban.columns[2].tasks.some((t) => t.id === task.id))
+            }
           >
             <img className="h-5" src={left} alt="" />
           </button>
           <button
             onClick={moveRight}
             className="rounded-sm hover:bg-gray-200 disabled:opacity-50"
-            disabled={activeKanban.columns[
-              activeKanban.columns.length - 1
-            ].tasks.some((t) => t.id === task.id)}
+            disabled={
+              activeKanban.columns[activeKanban.columns.length - 1].tasks.some(
+                (t) => t.id === task.id
+              ) ||
+              (activeKanban.columns[1].tasks.length >= wipLimit &&
+                activeKanban.columns[0].tasks.some((t) => t.id === task.id))
+            }
           >
             <img className="h-5" src={right} alt="" />
           </button>
