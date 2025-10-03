@@ -2,6 +2,8 @@ import type { Task } from "../../types";
 import Badge from "./Badge";
 import assigned from "../assets/assigned.svg";
 import modify from "../assets/modify.svg";
+import left from "../assets/left.svg";
+import right from "../assets/right.svg";
 
 type KanbanTaskProps = {
   task: Task;
@@ -27,7 +29,15 @@ const KanbanTask = ({ task }: KanbanTaskProps) => {
       </div>
       <div className="flex items-center justify-between mt-5">
         <p className="text-gray-400">{new Date(task.dueDate).toDateString()}</p>
-        <img className="h-4" src={modify} alt="Modify button" />
+        <div className="flex gap-3 items-center">
+          <img className="h-4" src={modify} alt="Modify button" />
+          <button>
+            <img className="h-5" src={left} alt="" />
+          </button>
+          <button>
+            <img className="h-5" src={right} alt="" />
+          </button>
+        </div>
       </div>
     </div>
   );
