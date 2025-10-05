@@ -49,10 +49,10 @@ const NewBoardForm = ({ kanbanStorage, setKanbanStorage }: NewBoardForm) => {
               </label>
               <div className="flex justify-between">
                 <Button variant="destructive" onClick={() => setIsOpen(false)}>
-                  Annuler
+                  Cancel
                 </Button>
                 <Button type="submit" variant="primary">
-                  Valider
+                  Confirm
                 </Button>
               </div>
             </form>

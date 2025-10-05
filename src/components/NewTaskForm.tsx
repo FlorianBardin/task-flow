@@ -3,19 +3,19 @@ import type { Assignee, Kanban, Task } from "../../types";
 import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 
-type NewBoardForm = {
+type NewTaskFormType = {
   kanbanStorage: Kanban[] | undefined;
   setKanbanStorage: (kanbans: Kanban[]) => unknown;
   activeKanban: Kanban;
   setActiveKanban: (kanban: Kanban) => unknown;
 };
 
-const NewBoardForm = ({
+const NewTaskForm = ({
   kanbanStorage,
   setKanbanStorage,
   activeKanban,
   setActiveKanban,
-}: NewBoardForm) => {
+}: NewTaskFormType) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectOption, setSelectOption] = useState<"Low" | "Medium" | "High">(
     "Low"
@@ -84,7 +84,7 @@ const NewBoardForm = ({
       <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="w-[90%] max-w-[700px] flex flex-col gap-4 bg-white p-8 rounded-2xl border border-gray-200 drop-shadow-xl">
-            <h2 className="font-medium">New board</h2>
+            <h2 className="font-medium">New Task</h2>
             <form action={insertNewTask} className="flex flex-col gap-4">
               <div className="flex gap-2">
                 <label className="flex flex-col gap-2 flex-1 min-w-0">
@@ -122,10 +122,10 @@ const NewBoardForm = ({
               </label>
               <div className="flex justify-between">
                 <Button variant="destructive" onClick={() => setIsOpen(false)}>
-                  Annuler
+                  Cancel
                 </Button>
                 <Button type="submit" variant="primary">
-                  Valider
+                  Confirm
                 </Button>
               </div>
             </form>
@@ -136,4 +136,4 @@ const NewBoardForm = ({
   );
 };
 
-export default NewBoardForm;
+export default NewTaskForm;
