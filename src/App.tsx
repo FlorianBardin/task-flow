@@ -111,23 +111,23 @@ const App = () => {
               setActiveKanban={setActiveKanban}
             />
             <div className="flex gap-3 items-center">
-              <p className="text-gray-700">WIP Limit : </p>
               <button
                 className="increase-button"
                 onClick={() => {
                   if (wipLimit - 1 >= 0) updateWipInStorage(wipLimit - 1);
                 }}
               >
-                <img className="w-2" src={whiteLeft} alt="" />
+                <img className="w-2" src={whiteLeft} alt="decrease button" />
               </button>
               <p className="bg-gray-200 rounded-lg h-fit w-fit p-2 px-4">
+                <span className="text-gray-500">WIP : </span>
                 {wipLimit}
               </p>
               <button
                 className="increase-button"
                 onClick={() => updateWipInStorage(wipLimit + 1)}
               >
-                <img className="w-2" src={whiteRight} alt="" />
+                <img className="w-2" src={whiteRight} alt="increase button" />
               </button>
             </div>
           </div>
