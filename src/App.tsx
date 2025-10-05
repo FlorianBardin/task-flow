@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { mockData } from "../data/mockData";
+import { exampleBoard } from "../data/exampleBoard";
+
 import KanbanColumn from "./components/KanbanColumn";
 import Button from "./components/Button";
 import NewBoardForm from "./components/NewBoardForm";
@@ -12,10 +13,10 @@ import whiteRight from "./assets/whiteRight.svg";
 import { useEffect } from "react";
 
 const App = () => {
-  const [kanbanStorage, setKanbanStorage] = useLocalStorage(
-    "kanbans",
-    mockData
-  );
+  const [kanbanStorage, setKanbanStorage] = useLocalStorage("kanbans", [
+    newBoard,
+    exampleBoard,
+  ]);
   const [activeKanban, setActiveKanban] = useState(kanbanStorage![0]);
   const [wipLimit, setWipLimit] = useState(activeKanban.wip);
 
@@ -58,14 +59,6 @@ const App = () => {
           wipLimit: wipLimit,
         }}
       >
-        <button
-          className="cursor-pointer"
-          onClick={() => {
-            localStorage.clear();
-          }}
-        >
-          Clear local storage
-        </button>
         <div className="flex justify-between items-start sm:items-center px-4 gap-3">
           <img className="w-9.5" src="task-flow-logo.svg" alt="" />
           <div className="flex flex-col sm:flex-row-reverse items-end gap-2">
