@@ -126,7 +126,9 @@ const KanbanTask = ({ task }: KanbanTaskProps) => {
         })}
       </div>
       <div className="flex flex-col gap-2 mt-5 sm:flex-row sm:justify-between sm:items-center">
-        <p className="text-gray-400">{new Date(task.dueDate).toDateString()}</p>
+        <p className="text-gray-400">
+          {new Date(task.createdAt).toDateString()}
+        </p>
         <div className="flex gap-3 items-center">
           <EditTaskForm
             kanbanStorage={kanbanStorage}

@@ -88,7 +88,7 @@ const EditTaskForm = ({
       description: description,
       priority: formValues.priority,
       assignee: assignees,
-      dueDate: new Date(),
+      createdAt: new Date(),
     };
 
     const columnIndex = activeKanban.columns.findIndex((col) =>

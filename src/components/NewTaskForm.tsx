@@ -43,7 +43,7 @@ const NewTaskForm = ({
       description: description,
       priority: selectOption,
       assignee: assignees,
-      dueDate: new Date(),
+      createdAt: new Date(),
     };
 
     const updatedColumns = [...activeKanban.columns];

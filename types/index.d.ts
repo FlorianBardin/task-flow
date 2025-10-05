@@ -20,7 +20,7 @@ export interface Task {
   description: string;
   priority: "Low" | "Medium" | "High";
   assignee: Assignee[];
-  dueDate: Date;
+  createdAt: Date;
 }
 
 export interface Assignee {
