@@ -1,11 +1,11 @@
 import type { Task } from "../../types";
 import Badge from "./Badge";
 import assigned from "../assets/assigned.svg";
-import modify from "../assets/modify.svg";
 import left from "../assets/left.svg";
 import right from "../assets/right.svg";
 import { useContext } from "react";
 import { KanbanContext } from "../contexts/KanbanContext";
+import EditTaskForm from "./EditTaskForm";
 
 type KanbanTaskProps = {
   task: Task;
@@ -125,10 +125,16 @@ const KanbanTask = ({ task }: KanbanTaskProps) => {
           );
         })}
       </div>
-      <div className="flex items-center justify-between mt-5">
+      <div className="flex flex-col gap-2 mt-5 sm:flex-row sm:justify-between sm:items-center">
         <p className="text-gray-400">{new Date(task.dueDate).toDateString()}</p>
         <div className="flex gap-3 items-center">
-          <img className="h-4" src={modify} alt="Modify button" />
+          <EditTaskForm
+            kanbanStorage={kanbanStorage}
+            setKanbanStorage={setKanbanStorage}
+            activeKanban={activeKanban}
+            setActiveKanban={setActiveKanban}
+            task={task}
+          />
           <button
             onClick={moveLeft}
             className="rounded-sm hover:bg-gray-200 disabled:opacity-50"
