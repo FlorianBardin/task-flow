@@ -20,7 +20,7 @@ export const newBoard: Kanban = {
             "You can also describe your tasks, indicate their priority and assign people to them!",
           priority: "Low",
           assignee: [{ id: 1, name: "Team member" }],
-          dueDate: new Date(),
+          createdAt: new Date(),
         },
       ],
     },
